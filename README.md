@@ -1,6 +1,6 @@
 # GO Feature Flag Python Provider
 
-> ⚠️ Development is in progress, so there's not a stable release available. ⚠️
+> ⚠️ Development is in progress ⚠️
 > See the upstream [OpenFeature SDK](https://github.com/open-feature/python-sdk) for details about when a stable version of this library is possible.
 
 GO Feature Flag provider allows you to connect to your GO Feature Flag instance.
