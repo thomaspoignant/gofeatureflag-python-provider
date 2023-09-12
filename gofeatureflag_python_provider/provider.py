@@ -1,16 +1,16 @@
 import json
 from typing import List, Optional, Type, Union
 
-import open_feature.exception.exceptions
-import open_feature.flag_evaluation.reason
+import open_feature.exception
+import open_feature.flag_evaluation
 import pydantic
 import urllib3
 from urllib3.util import parse_url
 from urllib.parse import urljoin, urlencode
 from pydantic import BaseModel, ValidationError, PrivateAttr
-from open_feature.evaluation_context.evaluation_context import EvaluationContext
-from open_feature.flag_evaluation.flag_evaluation_details import FlagEvaluationDetails
-from open_feature.hooks.hook import Hook
+from open_feature.evaluation_context import EvaluationContext
+from open_feature.flag_evaluation import FlagEvaluationDetails
+from open_feature.hook import Hook
 from open_feature.provider.metadata import Metadata
 from open_feature.provider.provider import AbstractProvider
 
@@ -25,10 +25,10 @@ from gofeatureflag_python_provider.response_flag_evaluation import (
     ResponseFlagEvaluation,
     JsonType,
 )
-from open_feature.flag_evaluation.reason import Reason
-from open_feature.exception.error_code import ErrorCode
+from open_feature.flag_evaluation import Reason
+from open_feature.exception import ErrorCode
 from http import HTTPStatus
-from open_feature.exception.exceptions import (
+from open_feature.exception import (
     FlagNotFoundError,
     TypeMismatchError,
     GeneralError,
@@ -127,12 +127,17 @@ class GoFeatureFlagProvider(AbstractProvider, BaseModel):
         :param evaluation_context: context to evaluate the flag
         :return: a FlagEvaluationDetails object containing the response for the SDK.
         """
+        print(flag_key, urljoin(str(self.options.endpoint), "/v1/feature/{}/eval".format(flag_key)))
         try:
+            print("setup")
             goff_user = user_from_evaluation_context(evaluation_context)
+            print("user")
             goff_request = RequestFlagEvaluation(
                 user=goff_user,
                 defaultValue=default_value,
             )
+
+            print(goff_user, goff_request)
 
             response = self._http_client.request(
                 method="POST",
@@ -142,6 +147,8 @@ class GoFeatureFlagProvider(AbstractProvider, BaseModel):
                 headers={"Content-Type": "application/json"},
                 body=goff_request.json(),
             )
+
+            print(response)
 
             if response.status == HTTPStatus.NOT_FOUND.value:
                 raise FlagNotFoundError(

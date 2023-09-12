@@ -1,7 +1,7 @@
 from typing import Optional, Any
 from pydantic import BaseModel
-from open_feature.evaluation_context.evaluation_context import EvaluationContext
-from open_feature.exception.exceptions import (
+from open_feature.evaluation_context import EvaluationContext
+from open_feature.exception import (
     TargetingKeyMissingError,
     InvalidContextError,
 )

@@ -10,4 +10,4 @@ class BaseModel(PydanticBaseModel):
 
 class GoFeatureFlagOptions(BaseModel):
     endpoint: AnyHttpUrl
-    urllib3PoolManager: typing.Optional[urllib3.PoolManager]
+    urllib3PoolManager: typing.Optional[urllib3.PoolManager] = None
