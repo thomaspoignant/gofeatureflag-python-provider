@@ -127,17 +127,12 @@ class GoFeatureFlagProvider(AbstractProvider, BaseModel):
         :param evaluation_context: context to evaluate the flag
         :return: a FlagEvaluationDetails object containing the response for the SDK.
         """
-        print(flag_key, urljoin(str(self.options.endpoint), "/v1/feature/{}/eval".format(flag_key)))
         try:
-            print("setup")
             goff_user = user_from_evaluation_context(evaluation_context)
-            print("user")
             goff_request = RequestFlagEvaluation(
                 user=goff_user,
                 defaultValue=default_value,
             )
-
-            print(goff_user, goff_request)
 
             response = self._http_client.request(
                 method="POST",
@@ -147,8 +142,6 @@ class GoFeatureFlagProvider(AbstractProvider, BaseModel):
                 headers={"Content-Type": "application/json"},
                 body=goff_request.json(),
             )
-
-            print(response)
 
             if response.status == HTTPStatus.NOT_FOUND.value:
                 raise FlagNotFoundError(
