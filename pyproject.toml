@@ -7,7 +7,7 @@ authors = ["Thomas Poignant"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-openfeature-sdk = "^0.0.6"
+openfeature-sdk = "^0.2.0"
 pydantic = "^1.10.2"
 urllib3 = "^1.26.13"
 
