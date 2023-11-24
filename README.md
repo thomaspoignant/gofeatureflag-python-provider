@@ -1,3 +1,9 @@
+ ### ⚠️⚠️⚠️ This repo is not used anymore. ⚠️⚠️⚠️
+ ### The `python-provider` has been moved to the main repository for GO Feature Flag and is now available directly in the main repository [thomaspoignant/go-feature-flag](https://github.com/thomaspoignant/go-feature-flag/tree/main/openfeature/providers/python-provider)
+
+---
+
+
 # GO Feature Flag Python Provider
 
 GO Feature Flag provider allows you to connect to your GO Feature Flag instance.  
